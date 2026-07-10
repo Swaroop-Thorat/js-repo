@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body onscroll="display()" style="height: 3000px;">
+  <section>
+    <p class="nrml">Normal Count </p>
+    <p class="thrt"> Thrt Count </p>
+    <p class="dbnc"> Debounce count </p>
+  </section>
+  <script>
+    const nrmlCount = document.querySelector(".nrml");
+    const thrtCount = document.querySelector(".thrt");
+    const dbncCount = document.querySelector(".dbnc");
+
+    let ncount = 0;
+    let tcount = 0;
+    let dcount = 0;
+    let isThrottled = false;
+    let debounceTimeout;
+
+    function nrmCount() {
+      ncount++;
+      nrmlCount.innerHTML = `Normal Count ${ncount}`;
+    }
+
+    function updateThrtCount() {
+      if (isThrottled) return;
+      
+      tcount++;
+      thrtCount.innerHTML = `Thrt Count ${tcount}`;
+      
+      isThrottled = true;
+      setTimeout(() => {
+        isThrottled = false;
+      }, 1000);
+    }
+
+    function updateDbncCount() {
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(() => {
+        dcount++;
+        dbncCount.innerHTML = `Debounce count ${dcount}`;
+      }, 1000);
+    }
+
+    function display() {
+      nrmCount();
+      updateThrtCount();
+      updateDbncCount();
+    }
+  </script>
+</body>
+</html>
