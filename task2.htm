@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button</title>
+</head>
+<body>
+    <button id="but" style="background-color: aqua;">Send OTP</button>
+</body>
+<script>
+    const but=document.getElementById("but")
+    let disable;
+    let blocked=false
+
+    
+    but.addEventListener("click",function send(){
+        if(!blocked){
+            const otp=Math.floor(1000+Math.random()*9000);
+            console.log(otp)
+            blocked=true
+            but.style.backgroundColor="red"
+        }
+        clearTimeout(disable)
+        disable=setTimeout(()=>{
+            blocked=false
+            but.style.backgroundColor="aqua"
+        },5000)
+        
+    })
+</script>
+</html>
