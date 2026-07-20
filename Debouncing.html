@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debouncing</title>
+</head>
+<body>
+  <input type="text" id="search">
+  <script>
+    const ip=document.getElementById("search")
+    let timer;
+
+    function print(word){
+      console.log(word)
+    }
+    ip.addEventListener("input",(e)=>{
+      clearTimeout(timer)
+      const word=e.target.value;
+      timer = setTimeout(()=>{
+        print(word)
+      },1000)
+    })
+  </script>
+</body>
+</html>
