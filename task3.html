@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Storage</title>
+</head>
+<body>
+
+    <input type="text" id="name" placeholder="Name">
+    <input type="text" id="course" placeholder="Course">
+    <input type="text" id="age" placeholder="Age">
+
+    <button id="save">Save</button>
+
+    <hr>
+    <br><br><br>
+    <h1>Name:<span id="N"></span></h1>
+    <h1>Course:<span id="C"></span></h1>
+    <h1>Age:<span id="A"></span></h1>
+    <button id="display">Fetch</button>
+
+    <hr>
+    <br><br><br>
+    <button id="clear">Clear</button>
+<script>
+    let name=document.getElementById("name")
+    let course=document.getElementById("course")
+    let age=document.getElementById("age")
+    let save=document.getElementById("save")
+    let N=document.getElementById("N")
+    let C=document.getElementById("C")
+    let A=document.getElementById("A")
+    let display=document.getElementById("display")
+    let clear=document.getElementById("clear")
+
+    save.addEventListener("click",()=>{
+        const nameVal=name.value
+        const courseVal=course.value
+        const ageVal=age.value
+
+        if(nameVal === "" || courseVal === "" || ageVal === ""){
+            alert("Please fill all details!")
+            return;
+        }
+
+        sessionStorage.setItem("name",nameVal);
+        sessionStorage.setItem("course",courseVal);
+        sessionStorage.setItem("age",ageVal);
+
+        alert("Record Saved")
+    })
+
+    display.addEventListener("click",()=>{
+        const nameVal=sessionStorage.getItem("name");
+        const courseVal=sessionStorage.getItem("course");
+        const ageVal=sessionStorage.getItem("age");
+
+        if(nameVal === null || courseVal === null || ageVal === null){
+            alert("No record found!")
+            return;
+        }
+
+
+        N.textContent=nameVal
+        C.textContent=courseVal
+        A.textContent=ageVal
+
+    })
+
+    clear.addEventListener("click",()=>{
+        sessionStorage.clear();
+        alert("Record Cleared")
+        N.textContent=""
+        C.textContent=""
+        A.textContent=""
+    })
+</script>
+</body>
+</html>
